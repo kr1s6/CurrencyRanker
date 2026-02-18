@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>currencyConverter</artifactId>
+	<artifactId>currencyRankerApi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CurrencyConverter</name>
 	<description>RESTful API to convert currencies using real-time exchange rates.
