@@ -19,16 +19,19 @@ public class CurrencyDataService {
 	@Autowired
 	private ExchangeRateApiService exchangeRateApi;
 	@Autowired
-	private CurrencyFullNameService currencyFullName;
+	private CurrencyBasicInfoService currencyBasicInfo;
 	public List<CurrencyData> currencyDataList;
 
 	@PostConstruct
 	private void getAllCurrencyData() {
 		Map<String, Double> rates = exchangeRateApi.getAllPlnRates();
+		Map<String, List<String>> currencyCountries = currencyBasicInfo.getCurrencyCountries();
+
 		currencyDataList = rates.entrySet().stream()
 				.map(entry -> CurrencyData.builder()
 						.currencyCode(entry.getKey())
-						.currencyName(currencyFullName.getCurrencyName(entry.getKey()))
+						.currencyName(currencyBasicInfo.getCurrencyName(entry.getKey()))
+						.countries(currencyCountries.getOrDefault(entry.getKey(), List.of("UNKNOWN")))
 						.rate(entry.getValue())
 						.turnover(OTC_TURNOVER.getOrDefault(entry.getKey(), -1.0))
 						.build())
