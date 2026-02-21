@@ -10,7 +10,7 @@ import java.util.Map;
  */
 @Service
 @RequiredArgsConstructor
-public class BisTurnoverService {
+public class TurnoverService {
 
 	/**
 	 * Plynność walut

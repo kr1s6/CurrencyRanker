@@ -1,7 +1,7 @@
 package com.example.currencyConverter.controller;
 
-import com.example.currencyConverter.model.CurrencyData;
-import com.example.currencyConverter.service.CurrencyDataService;
+import com.example.currencyConverter.model.CurrencyEntity;
+import com.example.currencyConverter.repository.CurrencyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +14,11 @@ import java.util.List;
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
 public class CurrencyDataController {
-
 	@Autowired
-	private final CurrencyDataService currencyDataService;
+	private CurrencyRepository currencyRepository;
 
 	@GetMapping("/getAllCurrencyData")
-	public List<CurrencyData> getAllCurrencyData() {
-		return currencyDataService.currencyDataList;
+	public List<CurrencyEntity> getAllCurrencyData() {
+		return currencyRepository.findAll();
 	}
 }

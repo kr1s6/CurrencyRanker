@@ -13,6 +13,7 @@ function App() {
     "Currency",
     "Code",
     "Turnover (%)",
+    "Inflation",
     "Kurs (1 PLN)"
   ];
 
@@ -23,6 +24,8 @@ function App() {
     turnover: number;
     rank: number;
     countries: string[];
+    inflation: string;
+    inflationUpdate: string;
   }
 
   useEffect(() => {
@@ -39,7 +42,9 @@ function App() {
             rate: key.rate,
             turnover: key.turnover,
             rank: key.rank,
-            countries: key.countries
+            countries: key.countries,
+            inflation: key.inflation,
+            inflationUpdate: key.inflationUpdate
           }));
 
         setCurrencies(currenciesArray);
@@ -123,6 +128,10 @@ function App() {
                 ) : (
                   <span className="text-gray-400 italic">UNKNOWN</span>
                 )}
+              </td>
+
+              <td className="px-2 py-4 text-sm text-slate-600">
+                {key.inflation}
               </td>
 
               <td className="px-2 py-4 text-sm text-slate-600">
