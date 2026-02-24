@@ -30,6 +30,9 @@ public class CurrencyEntity {
 	@Column(name = "turnover")
 	private double turnover;
 
+	@Column(name = "turnover_date")
+	private String turnoverDate;
+
 	@Column(name = "rank")
 	private Integer rank;
 
@@ -39,7 +42,7 @@ public class CurrencyEntity {
 	@Column(name = "inflation")
 	private Double inflation;
 
-	@Column(name = "inflation_update")
-	private String inflationUpdate;
+	@Column(name = "inflation_date")
+	private String inflationDate;
 
 }

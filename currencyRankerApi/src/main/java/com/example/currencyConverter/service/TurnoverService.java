@@ -16,7 +16,7 @@ public class TurnoverService {
 	 * Plynność walut
 	 * Rzeczywiste wykorzystanie waluty
 	 * Trading Volume (Wolumen handlu)
-	 * OTC foreign exchange turnover by currency 2025
+	 * OTC foreign exchange turnover by currency 30 September 2025
 	 */
 	public static final Map<String, Double> OTC_TURNOVER = Map.ofEntries(
 			Map.entry("USD", 89.2),
@@ -59,4 +59,6 @@ public class TurnoverService {
 			Map.entry("ARS", 0.0),
 			Map.entry("BHD", 0.0)
 	);
+
+	public static final String OTC_TURNOVER_DATE = "30.09.2025";
 }

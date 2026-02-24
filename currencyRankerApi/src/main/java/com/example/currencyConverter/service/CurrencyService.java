@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.example.currencyConverter.service.TurnoverService.OTC_TURNOVER;
+import static com.example.currencyConverter.service.TurnoverService.OTC_TURNOVER_DATE;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class CurrencyService {
 		Map<String, String> currencyCodeWithNameMap = exchangeRateApi.getAllCurrenciesCodeAndName();
 		Map<String, Double> plnRates = exchangeRateApi.getAllPlnRates();
 		Map<String, List<String>> currencyCountries = currencyBasicInfo.getCurrencyCountries();
-		Map<String, InflationDto> euCurrenciesInflation = inflationService.getMonthlyEuropeanCountriesInflation();
+		Map<String, InflationDto> currenciesInflation = inflationService.getInflationMap();
 
 		List<CurrencyEntity> currencyEntityList = currencyCodeWithNameMap.entrySet().stream()
 				.map(entry -> {
@@ -41,16 +42,17 @@ public class CurrencyService {
 							Double rate = plnRates.get(code);
 							Double turnover = OTC_TURNOVER.getOrDefault(code, -1.0);
 							List<String> countries = currencyCountries.getOrDefault(code, List.of("UNKNOWN"));
-							InflationDto inflationDto = euCurrenciesInflation.getOrDefault(code, null);
+							InflationDto inflationDto = currenciesInflation.getOrDefault(code, null);
 
 							return CurrencyEntity.builder()
 									.currencyCode(code)
 									.currencyName(name)
 									.rate(rate)
 									.turnover(turnover)
+									.turnoverDate(OTC_TURNOVER_DATE)
 									.countries(countries)
 									.inflation(inflationDto != null ? inflationDto.getInflation() : null)
-									.inflationUpdate(inflationDto != null ? inflationDto.getUpdate() : null)
+									.inflationDate(inflationDto != null ? inflationDto.getUpdate() : null)
 									.build();
 						}
 				).collect(Collectors.collectingAndThen(
